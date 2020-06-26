@@ -47,6 +47,7 @@ equalButton.addEventListener("click", function () {
     let num = Number(display.textContent);
     numbers.push(num);
     checkOperator();
+    numbers = [];
     operator = '';
     operatorCounter = 0;
     numCounter = 0;
