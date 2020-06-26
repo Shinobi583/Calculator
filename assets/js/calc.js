@@ -33,39 +33,11 @@ for (let i = 0; i < numberButtons.length; i++) {
     });
 }
 
-//can refactor both this event listener and the equals one. Create a function for the checking of the operators. Then add numCounter for this one under the func.
 for (let i = 0; i < operatorButtons.length; i++) {
     operatorButtons[i].addEventListener("click", function () {
         let num = Number(display.textContent);
         numbers.push(num);
-        if (operator === '+') {
-            let result = add(numbers);
-            display.textContent = result;
-            numbers.splice(0, numbers.length, result);
-            numCounter = 0;
-        }
-        else if (operator === '-') {
-            let result = subtract(numbers);
-            display.textContent = result;
-            numbers.splice(0, numbers.length, result);
-            numCounter = 0;
-        }
-        else if (operator === '*') {
-            let result = multiply(numbers);
-            display.textContent = result;
-            numbers.splice(0, numbers.length, result);
-            numCounter = 0;
-        }
-        else if (operator === '/') {
-            let result = divide(numbers);
-            display.textContent = result;
-            numbers.splice(0, numbers.length, result);
-            numCounter = 0;
-        }
-        else {
-            operator = this.textContent;
-            display.textContent = 0;
-        }
+        checkOperator();
         operator = this.textContent;
         operatorCounter += 1;
     });
@@ -74,26 +46,7 @@ for (let i = 0; i < operatorButtons.length; i++) {
 equalButton.addEventListener("click", function () {
     let num = Number(display.textContent);
     numbers.push(num);
-    if (operator === '+') {
-        let result = add(numbers);
-        display.textContent = result;
-        numbers.splice(0, numbers.length, result);
-    }
-    else if (operator === '-') {
-        let result = subtract(numbers);
-        display.textContent = result;
-        numbers.splice(0, numbers.length, result);
-    }
-    else if (operator === '*') {
-        let result = multiply(numbers);
-        display.textContent = result;
-        numbers.splice(0, numbers.length, result);
-    }
-    else if (operator === '/') {
-        let result = divide(numbers);
-        display.textContent = result;
-        numbers.splice(0, numbers.length, result);
-    }
+    checkOperator();
     operator = '';
     operatorCounter = 0;
     numCounter = 0;
@@ -129,6 +82,37 @@ plusMinusButton.addEventListener("click", function () {
         display.textContent = opp;
     }
 });
+
+function checkOperator() {
+    if (operator === '+') {
+        let result = add(numbers);
+        display.textContent = result;
+        numbers.splice(0, numbers.length, result);
+        numCounter = 0;
+    }
+    else if (operator === '-') {
+        let result = subtract(numbers);
+        display.textContent = result;
+        numbers.splice(0, numbers.length, result);
+        numCounter = 0;
+    }
+    else if (operator === '*') {
+        let result = multiply(numbers);
+        display.textContent = result;
+        numbers.splice(0, numbers.length, result);
+        numCounter = 0;
+    }
+    else if (operator === '/') {
+        let result = divide(numbers);
+        display.textContent = result;
+        numbers.splice(0, numbers.length, result);
+        numCounter = 0;
+    }
+    else {
+        operator = this.textContent;
+        display.textContent = 0;
+    }
+}
 
 function add(arr) {
     return arr.reduce(function (accumulator, currentValue) {
